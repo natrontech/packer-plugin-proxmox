@@ -9,9 +9,9 @@ import (
 
 	"github.com/hashicorp/packer-plugin-sdk/plugin"
 
-	proxmoxclone "github.com/hashicorp/packer-plugin-proxmox/builder/proxmox/clone"
-	proxmoxiso "github.com/hashicorp/packer-plugin-proxmox/builder/proxmox/iso"
-	"github.com/hashicorp/packer-plugin-proxmox/version"
+	proxmoxclone "github.com/natrontech/packer-plugin-proxmox/builder/proxmox/clone"
+	proxmoxiso "github.com/natrontech/packer-plugin-proxmox/builder/proxmox/iso"
+	"github.com/natrontech/packer-plugin-proxmox/version"
 )
 
 func main() {

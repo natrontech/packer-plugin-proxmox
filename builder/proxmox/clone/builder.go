@@ -10,7 +10,7 @@ import (
 
 	proxmoxapi "github.com/Telmate/proxmox-api-go/proxmox"
 	"github.com/hashicorp/hcl/v2/hcldec"
-	proxmox "github.com/hashicorp/packer-plugin-proxmox/builder/proxmox/common"
+	proxmox "github.com/natrontech/packer-plugin-proxmox/builder/proxmox/common"
 	"github.com/hashicorp/packer-plugin-sdk/multistep"
 	packersdk "github.com/hashicorp/packer-plugin-sdk/packer"
 

@@ -1,4 +1,4 @@
-module github.com/hashicorp/packer-plugin-proxmox
+module github.com/natrontech/packer-plugin-proxmox
 
 go 1.23.0
 

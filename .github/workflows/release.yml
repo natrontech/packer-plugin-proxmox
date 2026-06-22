@@ -1,4 +1,4 @@
-# Copyright (c) HashiCorp, Inc.
+# Copyright (c) natrontech
 # SPDX-License-Identifier: MPL-2.0
 
 # This GitHub action can publish assets for release when a tag is created.

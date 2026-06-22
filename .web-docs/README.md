@@ -9,7 +9,7 @@ packer {
   required_plugins {
     name = {
       version = "~> 1"
-      source  = "github.com/hashicorp/proxmox"
+      source  = "github.com/natrontech/proxmox"
     }
   }
 }
@@ -17,7 +17,7 @@ packer {
 Alternatively, you can use `packer plugins install` to manage installation of this plugin.
 
 ```sh
-packer plugins install github.com/hashicorp/proxmox
+packer plugins install github.com/natrontech/proxmox
 ```
 
 ### Components
@@ -26,11 +26,11 @@ Packer is able to target both ISO and existing Cloud-Init images.
 
 #### Builders
 
-- [proxmox-clone](/packer/integrations/hashicorp/proxmox/latest/components/builder/clone) - The proxmox image
+- [proxmox-clone](/packer/integrations/natrontech/proxmox/latest/components/builder/clone) - The proxmox image
   builder is able to create new images for use with Proxmox VE. The builder takes a cloud-init enabled virtual machine
   template name, runs any provisioning necessary on the image after
   launching it, then creates a virtual machine template.
-- [proxmox-iso](/packer/integrations/hashicorp/proxmox/latest/components/builder/iso) - The proxmox ISO
+- [proxmox-iso](/packer/integrations/natrontech/proxmox/latest/components/builder/iso) - The proxmox ISO
   builder is able to create new images for use with Proxmox VE. The builder
   takes an ISO source, runs any provisioning necessary on the image after
   launching it, then creates a virtual machine template.
