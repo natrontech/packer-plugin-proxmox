@@ -712,3 +712,78 @@ func TestPCIDeviceMapping(t *testing.T) {
 		})
 	}
 }
+
+func TestDiskConfig(t *testing.T) {
+	testCases := []struct {
+		name          string
+		disk          map[string]interface{}
+		expectedError error
+	}{
+		{
+			name: "read_only on scsi is valid",
+			disk: map[string]interface{}{
+				"type":         "scsi",
+				"storage_pool": "local-lvm",
+				"disk_size":    "10G",
+				"read_only":    true,
+			},
+		},
+		{
+			name: "read_only on virtio is valid",
+			disk: map[string]interface{}{
+				"type":         "virtio",
+				"storage_pool": "local-lvm",
+				"disk_size":    "10G",
+				"read_only":    true,
+			},
+		},
+		{
+			name: "read_only on ide is invalid",
+			disk: map[string]interface{}{
+				"type":         "ide",
+				"storage_pool": "local-lvm",
+				"disk_size":    "10G",
+				"read_only":    true,
+			},
+			expectedError: fmt.Errorf("read_only is only supported for scsi and virtio disks"),
+		},
+		{
+			name: "read_only on sata is invalid",
+			disk: map[string]interface{}{
+				"type":         "sata",
+				"storage_pool": "local-lvm",
+				"disk_size":    "10G",
+				"read_only":    true,
+			},
+			expectedError: fmt.Errorf("read_only is only supported for scsi and virtio disks"),
+		},
+		{
+			name: "skip_replication on any disk type is valid",
+			disk: map[string]interface{}{
+				"type":             "scsi",
+				"storage_pool":     "local-lvm",
+				"disk_size":        "10G",
+				"skip_replication": true,
+			},
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			cfg := mandatoryConfig(t)
+			cfg["disks"] = []map[string]interface{}{tc.disk}
+
+			var c Config
+			_, _, err := c.Prepare(&c, cfg)
+
+			switch {
+			case tc.expectedError == nil && err != nil:
+				t.Errorf("expected config preparation to succeed, but %s", err.Error())
+			case tc.expectedError != nil && err == nil:
+				t.Error("expected config preparation to fail, but no error occured")
+			case tc.expectedError != nil && !strings.Contains(err.Error(), tc.expectedError.Error()):
+				t.Errorf("expected config preparation errors to match - want %q, got %q", tc.expectedError, err)
+			}
+		})
+	}
+}

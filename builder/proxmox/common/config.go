@@ -384,6 +384,12 @@ type diskConfig struct {
 	//
 	// This cannot work with virtio disks.
 	SSD bool `mapstructure:"ssd"`
+	// Mark disk as read-only. Only supported for `scsi` and `virtio` disk types.
+	// Defaults to false.
+	ReadOnly bool `mapstructure:"read_only"`
+	// Disable replication of this disk. When set to true, the disk will not be
+	// replicated via Proxmox storage replication. Defaults to false (replication enabled).
+	SkipReplication bool `mapstructure:"skip_replication"`
 }
 
 // Set the efidisk storage options.
@@ -824,6 +830,9 @@ func (c *Config) Prepare(upper interface{}, raws ...interface{}) ([]string, []st
 		}
 		if disk.SSD && disk.Type == "virtio" {
 			errs = packersdk.MultiErrorAppend(errs, fmt.Errorf("SSD emulation is not supported on virtio disks"))
+		}
+		if disk.ReadOnly && disk.Type != "scsi" && disk.Type != "virtio" {
+			errs = packersdk.MultiErrorAppend(errs, fmt.Errorf("read_only is only supported for scsi and virtio disks"))
 		}
 		if disk.StoragePool == "" {
 			errs = packersdk.MultiErrorAppend(errs, fmt.Errorf("disks[%d].storage_pool must be specified", idx))

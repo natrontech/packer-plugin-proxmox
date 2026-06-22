@@ -74,3 +74,25 @@ Steps that touch the Proxmox API accept narrow interfaces (`vmStarter`, `templat
 ## Module path
 
 `github.com/natrontech/packer-plugin-proxmox` — this is a fork of `hashicorp/packer-plugin-proxmox`.
+
+## Proxmox API reference
+
+When adding new VM/disk/NIC features, the authoritative source for what fields are available is the `proxmox-api-go` library (the Go client, not the Proxmox HTTP API docs):
+
+```
+$(go env GOPATH)/pkg/mod/github.com/!telmate/proxmox-api-go@<version>/proxmox/
+```
+
+Key files for disk features:
+- `config_qemu_disk.go` — shared `qemuDisk` struct and serialisation logic
+- `config_qemu_disk_scsi.go` / `_ide.go` / `_sata.go` / `_virtio.go` — per-bus disk structs
+
+Check the struct fields and inline comments (e.g. `// Only set for scsi,virtio`) to understand which options are valid per disk type before implementing config fields.
+
+After adding new config fields, always run `make generate` to regenerate the HCL2 spec and docs files.
+
+## Testing
+
+- Add or update tests whenever a config field or feature is added or changed.
+- Config validation tests go in `common/config_test.go` (use `TestDiskConfig` as a model for disk options).
+- Disk wiring tests go in `common/step_start_vm_test.go` in `TestGenerateProxmoxDisks`.

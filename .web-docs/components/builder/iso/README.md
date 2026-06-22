@@ -627,6 +627,12 @@ Example:
   
   This cannot work with virtio disks.
 
+- `read_only` (bool) - Mark disk as read-only. Only supported for `scsi` and `virtio` disk types.
+  Defaults to false.
+
+- `skip_replication` (bool) - Disable replication of this disk. When set to true, the disk will not be
+  replicated via Proxmox storage replication. Defaults to false (replication enabled).
+
 <!-- End of code generated from the comments of the diskConfig struct in builder/proxmox/common/config.go; -->
 
 
