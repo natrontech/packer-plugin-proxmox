@@ -1,6 +1,8 @@
 # Copyright (c) natrontech
 # SPDX-License-Identifier: MPL-2.0
 
+version: "2"
+
 run:
   concurrency: 4
   timeout: 10m
@@ -43,8 +45,10 @@ linters:
         path: ".*_test.go"
     paths:
       - ".*\\.hcl2spec\\.go$"
-    max-issues-per-linter: 0
-    max-same-issues: 0
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
 
 formatters:
   enable:
@@ -52,4 +56,5 @@ formatters:
 
 output:
   formats:
-    - format: colored-line-number
+    text:
+      colors: true
