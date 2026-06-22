@@ -91,7 +91,7 @@ func (s *stepFinalizeTemplateConfig) Run(ctx context.Context, state multistep.St
 					break
 				}
 			}
-			if cloudInitAttached == false {
+			if !cloudInitAttached {
 				err := fmt.Errorf("Found no free controller of type %s for a cloud-init cdrom", c.CloudInitDiskType)
 				state.Put("error", err)
 				ui.Error(err.Error())
