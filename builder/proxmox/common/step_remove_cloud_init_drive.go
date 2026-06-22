@@ -60,6 +60,7 @@ func (s *stepRemoveCloudInitDrive) Run(ctx context.Context, state multistep.Stat
 
 	CloudInitParameters := []string{
 		"cipassword",
+		"ciupgrade",
 		"ciuser",
 		"nameserver",
 		"searchdomain",

@@ -105,6 +105,14 @@ func (s *stepFinalizeTemplateConfig) Run(ctx context.Context, state multistep.St
 		}
 	}
 
+	if c.CloudInitUpgradePackages != nil {
+		if *c.CloudInitUpgradePackages {
+			changes["ciupgrade"] = 1
+		} else {
+			changes["ciupgrade"] = 0
+		}
+	}
+
 	deleteItems := []string{}
 	if len(c.ISOs) > 0 {
 		for idx := range c.ISOs {
