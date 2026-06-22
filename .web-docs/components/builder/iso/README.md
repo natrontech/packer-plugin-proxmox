@@ -206,6 +206,10 @@ in the image's Cloud-Init settings for provisioning.
 - `cloud_init_disk_type` (string) - The type of Cloud-Init disk. Can be `scsi`, `sata`, or `ide`
   Defaults to `ide`.
 
+- `cloud_init_upgrade_packages` (bool) - If true, cloud-init will upgrade packages on first boot.
+  If false, package upgrades are explicitly disabled. If not set, the Proxmox default applies
+  (enabled on Proxmox 8+). Requires `cloud_init` to be set to `true`.
+
 - `additional_iso_files` ([]ISOsConfig) - ISO files attached to the virtual machine.
   See [ISOs](#isos).
 

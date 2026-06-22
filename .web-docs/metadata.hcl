@@ -1,4 +1,4 @@
-# Copyright (c) HashiCorp, Inc.
+# Copyright (c) NatronTech, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
 # For full specification on the configuration of this file visit:
@@ -6,7 +6,7 @@
 integration {
   name = "Proxmox"
   description = "The Proxmox Packer builder is able to create Proxmox virtual machines and store them as new Proxmox Virtual Machine images."
-  identifier = "packer/hashicorp/proxmox"
+  identifier = "packer/natrontech/proxmox"
   component {
     type = "builder"
     name = "Proxmox Clone"
