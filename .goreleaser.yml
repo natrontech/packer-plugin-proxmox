@@ -85,10 +85,9 @@ builds:
         goarch: '386'
     binary: '{{ .ProjectName }}_v{{ .Version }}_{{ .Env.API_VERSION }}_{{ .Os }}_{{ .Arch }}'
 archives:
-- format: zip
+- formats: [zip]
   files:
     - "LICENSE.txt"
-
   name_template: '{{ .ProjectName }}_v{{ .Version }}_{{ .Env.API_VERSION }}_{{ .Os }}_{{ .Arch }}'
 checksum:
   name_template: '{{ .ProjectName }}_v{{ .Version }}_SHA256SUMS'
