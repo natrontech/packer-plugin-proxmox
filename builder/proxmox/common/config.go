@@ -809,7 +809,7 @@ func (c *Config) Prepare(upper interface{}, raws ...interface{}) ([]string, []st
 				errs = packersdk.MultiErrorAppend(errs, fmt.Errorf("io thread option requires virtio-scsi-single controller"))
 			} else {
 				// ... and only for virtio and scsi disks
-				if !(disk.Type == "scsi" || disk.Type == "virtio") {
+				if disk.Type != "scsi" && disk.Type != "virtio" {
 					errs = packersdk.MultiErrorAppend(errs, fmt.Errorf("io thread option requires scsi or a virtio disk"))
 				}
 			}
@@ -927,12 +927,12 @@ func (c *Config) Prepare(upper interface{}, raws ...interface{}) ([]string, []st
 			log.Printf("TPM state device defined, but no tpm_version given, using v2.0")
 			c.TPMConfig.Version = "v2.0"
 		}
-		if !(c.TPMConfig.Version == "v1.2" || c.TPMConfig.Version == "v2.0") {
+		if c.TPMConfig.Version != "v1.2" && c.TPMConfig.Version != "v2.0" {
 			errs = packersdk.MultiErrorAppend(errs, errors.New("TPM Version must be one of \"v1.2\", \"v2.0\""))
 		}
 	}
 	if c.Rng0 != (rng0Config{}) {
-		if !(c.Rng0.Source == "/dev/urandom" || c.Rng0.Source == "/dev/random" || c.Rng0.Source == "/dev/hwrng") {
+		if c.Rng0.Source != "/dev/urandom" && c.Rng0.Source != "/dev/random" && c.Rng0.Source != "/dev/hwrng" {
 			errs = packersdk.MultiErrorAppend(errs, errors.New("source must be one of \"/dev/urandom\", \"/dev/random\", \"/dev/hwrng\""))
 		}
 		if c.Rng0.MaxBytes < 0 {

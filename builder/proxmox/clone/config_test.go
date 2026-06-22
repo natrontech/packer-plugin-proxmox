@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	proxmox "github.com/natrontech/packer-plugin-proxmox/builder/proxmox/common"
 	packersdk "github.com/hashicorp/packer-plugin-sdk/packer"
+	proxmox "github.com/natrontech/packer-plugin-proxmox/builder/proxmox/common"
 )
 
 func mandatoryConfig(t *testing.T) map[string]interface{} {

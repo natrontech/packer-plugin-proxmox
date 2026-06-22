@@ -92,7 +92,7 @@ func (s *stepFinalizeTemplateConfig) Run(ctx context.Context, state multistep.St
 				}
 			}
 			if !cloudInitAttached {
-				err := fmt.Errorf("Found no free controller of type %s for a cloud-init cdrom", c.CloudInitDiskType)
+				err := fmt.Errorf("found no free controller of type %s for a cloud-init cdrom", c.CloudInitDiskType)
 				state.Put("error", err)
 				ui.Error(err.Error())
 				return multistep.ActionHalt
@@ -119,7 +119,7 @@ func (s *stepFinalizeTemplateConfig) Run(ctx context.Context, state multistep.St
 			cdrom := c.ISOs[idx].AssignedDeviceIndex
 			if c.ISOs[idx].Unmount {
 				if vmParams[cdrom] == nil || !strings.Contains(vmParams[cdrom].(string), "media=cdrom") {
-					err := fmt.Errorf("Cannot eject ISO from cdrom drive, %s is not present or not a cdrom media", cdrom)
+					err := fmt.Errorf("cannot eject ISO from cdrom drive, %s is not present or not a cdrom media", cdrom)
 					state.Put("error", err)
 					ui.Error(err.Error())
 					return multistep.ActionHalt
@@ -149,7 +149,7 @@ func (s *stepFinalizeTemplateConfig) Run(ctx context.Context, state multistep.St
 	if len(changes) > 0 {
 		_, err := client.SetVmConfig(vmRef, changes)
 		if err != nil {
-			err := fmt.Errorf("Error updating template: %s", err)
+			err := fmt.Errorf("error updating template: %s", err)
 			state.Put("error", err)
 			ui.Error(err.Error())
 			return multistep.ActionHalt

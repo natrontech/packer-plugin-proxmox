@@ -11,9 +11,9 @@ import (
 	"fmt"
 	"log"
 
-	common "github.com/natrontech/packer-plugin-proxmox/builder/proxmox/common"
 	"github.com/hashicorp/packer-plugin-sdk/multistep/commonsteps"
 	packersdk "github.com/hashicorp/packer-plugin-sdk/packer"
+	common "github.com/natrontech/packer-plugin-proxmox/builder/proxmox/common"
 )
 
 type Config struct {

@@ -11,9 +11,9 @@ import (
 	"strings"
 
 	proxmoxapi "github.com/Telmate/proxmox-api-go/proxmox"
-	proxmox "github.com/natrontech/packer-plugin-proxmox/builder/proxmox/common"
 	"github.com/hashicorp/packer-plugin-sdk/multistep"
 	packersdk "github.com/hashicorp/packer-plugin-sdk/packer"
+	proxmox "github.com/natrontech/packer-plugin-proxmox/builder/proxmox/common"
 )
 
 // StepMapSourceDisks retrieves the configuration of the clone source vm
@@ -39,7 +39,7 @@ func (s *StepMapSourceDisks) Run(ctx context.Context, state multistep.StateBag) 
 	if c.CloneVM != "" {
 		sourceVmrs, err := client.GetVmRefsByName(c.CloneVM)
 		if err != nil {
-			state.Put("error", fmt.Errorf("Could not retrieve VM: %s", err))
+			state.Put("error", fmt.Errorf("could not retrieve VM: %s", err))
 			return multistep.ActionHalt
 		}
 		// prefer source Vm located on same node
@@ -53,7 +53,7 @@ func (s *StepMapSourceDisks) Run(ctx context.Context, state multistep.StateBag) 
 		sourceVmr = proxmoxapi.NewVmRef(c.CloneVMID)
 		err := client.CheckVmRef(sourceVmr)
 		if err != nil {
-			state.Put("error", fmt.Errorf("Could not retrieve VM: %s", err))
+			state.Put("error", fmt.Errorf("could not retrieve VM: %s", err))
 			return multistep.ActionHalt
 		}
 	}

@@ -36,6 +36,10 @@ linters:
       - linters:
           - staticcheck
         text: "SA(1006|1019|4006|4010|4017|5007|6005|9004):"
+      # QF1008: embedded field selectors are intentionally explicit for readability
+      - linters:
+          - staticcheck
+        text: "QF1008"
       # Exclude lll issues for long lines with go:generate
       - linters:
           - lll

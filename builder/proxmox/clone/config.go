@@ -13,9 +13,9 @@ import (
 	"net/netip"
 	"strings"
 
-	proxmoxcommon "github.com/natrontech/packer-plugin-proxmox/builder/proxmox/common"
 	packersdk "github.com/hashicorp/packer-plugin-sdk/packer"
 	"github.com/hashicorp/packer-plugin-sdk/template/config"
+	proxmoxcommon "github.com/natrontech/packer-plugin-proxmox/builder/proxmox/common"
 )
 
 type Config struct {
